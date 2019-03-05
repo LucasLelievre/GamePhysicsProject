@@ -31,7 +31,7 @@ public:
 
 	void setInvMass(float mass);
 	void setRestitution(float restit);
-
+	void setPosition(vec2 pos);
 	void clearAccumulator();
 	void addForce(vec2& force);
 

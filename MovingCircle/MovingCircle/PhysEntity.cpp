@@ -8,6 +8,10 @@ void PhysEntity::setParams(PhysParameters &newParams) {
 	*params = newParams;
 }
 
+Collider* PhysEntity::getCollider() {
+	return collider;
+}
+
 
 
 /*PhysEntity::PhysEntity()

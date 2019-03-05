@@ -1,9 +1,12 @@
 // (c) Marco Gilardi, 2017
 #include <GL\glut.h>
 #include <vector>
+#include <memory>
 #include "GameWindow.h"
 #include "ForceRegistery.h"
 #include "Solver.h"
+#include "ContactResolver.h"
+#include "CollisionData.h"
 using namespace std;
 #pragma once
 class Game
@@ -14,6 +17,8 @@ private:
 	Solver* solver = nullptr;
 	vector<PhysEntity*> dynObjs;
 
+	vector<unique_ptr<CollisionData>> collisionData;
+	ContactResolver* resolver = nullptr;
 public:
 	void Load();
 	//void GameLoop();
@@ -35,7 +40,6 @@ public:
 		if (forceRegistery != nullptr) delete forceRegistery;
 	}
 
-	//Timer* gameTimer;
-	//float lastFrameTime;
+	void getCollisisonData();
 
 };

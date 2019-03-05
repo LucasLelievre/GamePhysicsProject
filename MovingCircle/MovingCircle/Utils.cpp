@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include "Utils.h"
-//#include "AABB.h"
-//#include "BoundingSphere.h"
+#include "AABB.h"
+#include "BoundingSphere.h"
 
 using namespace std;
 
@@ -33,38 +33,38 @@ bool Utils::pointIsAbovePlane(const vec2 & P, const vec2 & n, float d)
 	return dot(n, P) + d > FLT_EPSILON;
 }
 
-//vec2 Utils::projectPointOnAABB(const vec2 & P, const AABB* const aabb)
-//{
-//	vec2 center = aabb->getCenter();
-//	vec2 radii = aabb->getRadii();
-//	vec2 normal = Utils::getAABBFaceNormal(P, aabb);
-//	float d = abs(dot(normal, radii));
-//	vec2 point = projectPointOnPlane(P-center, normal, d);
-//	return point+center;
-//}
+vec2 Utils::projectPointOnAABB(const vec2 & P, const AABB* const aabb)
+{
+	vec2 center = aabb->getCenter();
+	vec2 radii = aabb->getRadii();
+	vec2 normal = Utils::getAABBFaceNormal(P, aabb);
+	float d = abs(dot(normal, radii));
+	vec2 point = projectPointOnPlane(P-center, normal, d);
+	return point+center;
+}
 
-//vec2 Utils::getAABBFaceNormal(const vec2& const P, const AABB* const aabb)
-//{
-//	char mask = Utils::computePointMask(P, aabb);
-//	vec2 normal = vec2(0);
-//	if ((mask & 1) == 1)	// +x
-//	{
-//		normal += Utils::right;
-//	}
-//	if ((mask & 2) == 2)	// -x
-//	{
-//		normal += Utils::left;
-//	}
-//	if ((mask & 4) == 4)	// +y
-//	{
-//		normal += Utils::up;
-//	}
-//	if ((mask & 8) == 8)	// -y
-//	{
-//		normal += Utils::down;
-//	}
-//	return normalize(normal);
-//}
+vec2 Utils::getAABBFaceNormal(const vec2& const P, const AABB* const aabb)
+{
+	char mask = Utils::computePointMask(P, aabb);
+	vec2 normal = vec2(0);
+	if ((mask & 1) == 1)	// +x
+	{
+		normal += Utils::right;
+	}
+	if ((mask & 2) == 2)	// -x
+	{
+		normal += Utils::left;
+	}
+	if ((mask & 4) == 4)	// +y
+	{
+		normal += Utils::up;
+	}
+	if ((mask & 8) == 8)	// -y
+	{
+		normal += Utils::down;
+	}
+	return normalize(normal);
+}
 
 vec2 Utils::projectPointOnPlane(const vec2& P, const vec2& n, float c)
 {
@@ -99,32 +99,32 @@ This is foe the 2D case with codes for +/-x and +/-y
 the 3D case for +/-z is similar but using 6 bits instead of 4
 
 */
-////char Utils::computePointMask(const vec2& P, const AABB* aabb)
-//{
-//	vec2 center = aabb->getCenter();
-//	vec2 radii = aabb->getRadii();
-//
-//	char mask = 0;
-//	if (pointIsAbovePlane(P, Utils::right, - center.x - radii.x)) 
-//	{
-//		//cout << "X" << endl;
-//		mask |= 1;// +x
-//	}
-//	if (pointIsAbovePlane(P, Utils::left, center.x - radii.x))
-//	{
-//		//cout << "-X" << endl;
-//		mask |= 2;	// -x
-//	}
-//	if (pointIsAbovePlane(P, Utils::up, -center.y - radii.y))
-//	{
-//		//cout << "Y" << endl;
-//		mask |= 4;	// +y
-//	}
-//	if (pointIsAbovePlane(P, Utils::down, center.y - radii.y))
-//	{
-//		//cout << "-Y" << endl;
-//		mask |= 8;	// -y
-//	}
-//	return mask;
-//}
+char Utils::computePointMask(const vec2& P, const AABB* aabb)
+{
+	vec2 center = aabb->getCenter();
+	vec2 radii = aabb->getRadii();
+
+	char mask = 0;
+	if (pointIsAbovePlane(P, Utils::right, - center.x - radii.x)) 
+	{
+		//cout << "X" << endl;
+		mask |= 1;// +x
+	}
+	if (pointIsAbovePlane(P, Utils::left, center.x - radii.x))
+	{
+		//cout << "-X" << endl;
+		mask |= 2;	// -x
+	}
+	if (pointIsAbovePlane(P, Utils::up, -center.y - radii.y))
+	{
+		//cout << "Y" << endl;
+		mask |= 4;	// +y
+	}
+	if (pointIsAbovePlane(P, Utils::down, center.y - radii.y))
+	{
+		//cout << "-Y" << endl;
+		mask |= 8;	// -y
+	}
+	return mask;
+}
 

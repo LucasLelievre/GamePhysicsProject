@@ -113,7 +113,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BoundingSphere.cpp" />
+    <ClCompile Include="CollisionDetector.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="ContactResolver.cpp" />
     <ClCompile Include="EulerSolver.cpp" />
     <ClCompile Include="ForceRegistery.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -131,8 +136,15 @@
     <ClCompile Include="VerletSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Boundaries.h" />
+    <ClInclude Include="BoundingSphere.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionData.h" />
+    <ClInclude Include="CollisionDetector.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="ContactResolver.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EulerSolver.h" />
     <ClInclude Include="Force.h" />

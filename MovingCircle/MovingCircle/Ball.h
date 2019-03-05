@@ -5,6 +5,7 @@
 #include "Entity.h"
 
 #include "PhysEntity.h"
+#include "BoundingSphere.h"
 
 
 using namespace std;
@@ -17,6 +18,7 @@ private:
 public:
 	Ball(float radius, PhysParameters* params, vec3 color = vec3(0, 1, 1)) : radius(radius), color(color){
 		Ball::params = params;
+		collider = new BoundingSphere(Ball::radius, params->transform.getPosition());
 	}
 
 	virtual ~Ball() {}

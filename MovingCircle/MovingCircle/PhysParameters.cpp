@@ -30,3 +30,9 @@ void PhysParameters::addForce(vec2& force) {
 void PhysParameters::Print() {
 	cout << getInverseMass() << "  " << transform.getPosition().x << " " << transform.getPosition().y << "  " << velocity.x << " " << velocity.y << endl;
 }
+
+void PhysParameters::setPosition(vec2 pos)
+{
+	transform.Translate(pos);
+
+}

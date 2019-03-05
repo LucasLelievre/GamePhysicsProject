@@ -4,6 +4,8 @@
 #include <vector>
 #include "VerletSolver.h"
 #include "Gravity.h"
+#include "ContactResolver.h"
+#include "CollisionDetector.h"
 
 using namespace std;
 
@@ -13,9 +15,16 @@ void Game::Load()
 	solver = new VerletSolver;
 	forceRegistery = new ForceRegistery;
 
+	resolver = new ContactResolver();
+
 	Gravity* gravity = new Gravity(vec2(0, -300));
 	PhysParameters* params = new PhysParameters(10, vec2(100, 255), vec2(200, 200), 0.0f);
 	Ball* ball = new Ball(10, params);
+	forceRegistery->add(ball, gravity);
+	dynObjs.push_back(ball);
+
+	params = new PhysParameters(10, vec2(200, 255), vec2(-200, 200), 0.0f);
+	ball = new Ball(10, params);
 	forceRegistery->add(ball, gravity);
 	dynObjs.push_back(ball);
 }
@@ -30,7 +39,15 @@ void Game::Update(float dt)
 	{
 		(*it)->update(dt);
 	}
+	getCollisisonData();
 
+	while (collisionData.empty()) {
+		unique_ptr<CollisionData>& data = collisionData.back();
+		resolver->setNumIterations(data->maxNumContacts - data->numContactsLeft);
+		if (data->contact != nullptr) resolver->resolverContacts(data->contact, data->numContactsLeft, dt);
+
+		collisionData.pop_back();
+	}
 }
 
 void Game::ReshapeWindow(int width, int height)
@@ -52,4 +69,13 @@ void Game::Render()
 
 void Game::Inputs()
 {
+}
+
+void Game::getCollisisonData() {
+	for (vector<PhysEntity*>::iterator it_obj1 = dynObjs.begin(); it_obj1 < dynObjs.end(); it_obj1++) {
+		for (vector<PhysEntity*>::iterator it_obj2 = it_obj1 + 1; it_obj2 < dynObjs.end(); it_obj2++) {
+			CollisionData * data = CollisionDetector::CheckCollision(*it_obj1, *it_obj2);
+			if (data != nullptr) collisionData.push_back(unique_ptr<CollisionData>(data));
+		}
+	}
 }

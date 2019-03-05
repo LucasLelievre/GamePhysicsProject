@@ -5,6 +5,7 @@ using namespace std;
 
 void Ball::update(float dt)
 {
+	collider->update(params->transform);
 }
 
 void Ball::draw(int width, int height) // coordinates need to be in space (-aspectRatio, aspectRatio)x(-1, 1)

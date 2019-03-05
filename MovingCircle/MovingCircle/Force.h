@@ -3,8 +3,6 @@
 
 
 class Force {
-private:
-
 public:
 	Force() {};
 	virtual ~Force() {};
