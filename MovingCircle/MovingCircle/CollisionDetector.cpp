@@ -51,10 +51,10 @@ bool CollisionDetector::SphereSphereCollision(PhysEntity * obj1, PhysEntity * ob
 		(*data)->contact = new Contact[(*data)->maxNumContacts];
 
 		(*data)->contact[0].setObjects(vector<PhysEntity*> { obj1, obj2 });
-		(*data)->contact[0].setContactNormal(normalize(obj1->getParams()->transform.getPosition() - obj2->getParams()->transform.getPosition()));
-		(*data)->contact[0].setRestitution(0.5f*(obj1->getParams()->getRestitution() + obj2->getParams()->getRestitution()));
+		(*data)->contact[0].ContactNormal = (normalize(obj1->getParams()->transform.getPosition() - obj2->getParams()->transform.getPosition()));
+		(*data)->contact[0].restitution = (0.5f*(obj1->getParams()->getRestitution() + obj2->getParams()->getRestitution()));
 
-		(*data)->contact[0].setPenetration(penetration);
+		(*data)->contact[0].penetration = (penetration);
 		(*data)->numContactsLeft--;
 	}
 
@@ -85,19 +85,19 @@ bool CollisionDetector::SphereAABBCollision(PhysEntity * obj1, PhysEntity * obj2
 		(*data)->contact = new Contact[(*data)->maxNumContacts];
 
 		(*data)->contact[0].setObjects(vector<PhysEntity*> { obj1, obj2 });
-		if (obj1->getParams()->getInvMass() < obj2->getParams()->getInvMass())
+		if (obj1->getParams()->getInverseMass() < obj2->getParams()->getInverseMass())
 		{
 			(*data)->contact[0].setObjects(vector<PhysEntity*> { obj2, obj1 });
-			(*data)->contact[0].setContactNormal(-Utils::getAABBFaceNormal(s->getCenter(), aabb));
+			(*data)->contact[0].ContactNormal = (-Utils::getAABBFaceNormal(s->getCenter(), aabb));
 		}
 		else
 		{
 			(*data)->contact[0].setObjects(vector<PhysEntity*> { obj1, obj2 });
-			(*data)->contact[0].setContactNormal(Utils::getAABBFaceNormal(s->getCenter(), aabb));
+			(*data)->contact[0].ContactNormal = (Utils::getAABBFaceNormal(s->getCenter(), aabb));
 		}
-		(*data)->contact[0].setRestitution(0.5f * (obj1->getParams()->getRestitution() + obj2->getParams()->getRestitution()));
+		(*data)->contact[0].restitution = (0.5f * (obj1->getParams()->getRestitution() + obj2->getParams()->getRestitution()));
 
-		(*data)->contact[0].setPenetration(penetration);
+		(*data)->contact[0].penetration = (penetration);
 		(*data)->numContactsLeft--;
 	}
 
@@ -134,7 +134,7 @@ bool CollisionDetector::AABBAABBCollision(PhysEntity * obj1, PhysEntity * obj2, 
 		AABB* aabb = aabb2;
 
 		vec2 normal = -Utils::getAABBFaceNormal(point, aabb);
-		if (obj1->getParams()->getInvMass() < obj2->getParams()->getInvMass())
+		if (obj1->getParams()->getInverseMass() < obj2->getParams()->getInverseMass())
 		{
 			point = aabb2->getCenter();
 			aabb = aabb1;
@@ -145,13 +145,13 @@ bool CollisionDetector::AABBAABBCollision(PhysEntity * obj1, PhysEntity * obj2, 
 			normal = Utils::getAABBFaceNormal(point, aabb);
 			(*data)->contact[0].setObjects(vector<PhysEntity*> { obj1, obj2 });
 		}
-		(*data)->contact[0].setContactNormal(normal);
+		(*data)->contact[0].ContactNormal = (normal);
 
-		(*data)->contact[0].setRestitution(0.5f * (obj1->getParams()->getRestitution() + obj2->getParams()->getRestitution()));
+		(*data)->contact[0].restitution = (0.5f * (obj1->getParams()->getRestitution() + obj2->getParams()->getRestitution()));
 
 		vec2 penetrations = vec2(penetrationX, penetrationY);
 		float penetration = dot(penetrations, abs(normal));
-		(*data)->contact[0].setPenetration(penetration);
+		(*data)->contact[0].penetration = (penetration);
 		(*data)->numContactsLeft--;
 	}
 

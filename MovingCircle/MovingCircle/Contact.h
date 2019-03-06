@@ -17,5 +17,7 @@ public:
 	float computeSeperationalVelocity() const;
 	Contact();
 	~Contact();
+
+	void setObjects(vector<PhysEntity*> objs);
 };
 

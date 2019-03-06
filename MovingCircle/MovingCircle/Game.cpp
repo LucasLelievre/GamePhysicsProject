@@ -41,7 +41,7 @@ void Game::Update(float dt)
 	}
 	getCollisisonData();
 
-	while (collisionData.empty()) {
+	while (!collisionData.empty()) {
 		unique_ptr<CollisionData>& data = collisionData.back();
 		resolver->setNumIterations(data->maxNumContacts - data->numContactsLeft);
 		if (data->contact != nullptr) resolver->resolverContacts(data->contact, data->numContactsLeft, dt);

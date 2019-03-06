@@ -3,7 +3,7 @@
 #include <vector>
 #include "glm\glm.hpp"
 #include "Transform.h"
-#include "Contact.h"
+//#include "Contact.h"
 
 using namespace std;
 using namespace glm;

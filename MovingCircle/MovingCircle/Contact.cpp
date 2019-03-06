@@ -64,3 +64,8 @@ void Contact::resolveInterpenetration(float dt)
 Contact::~Contact()
 {
 }
+
+void Contact::setObjects(vector<PhysEntity*> objs) {
+	obj[0] = objs[0];
+	obj[1] = objs[1];
+}
