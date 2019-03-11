@@ -126,6 +126,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Boundaries.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="PhysEntity.cpp" />
     <ClCompile Include="PhysParameters.cpp" />
     <ClCompile Include="Solver.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Force.h" />
     <ClInclude Include="ForceRegistery.h" />
     <ClInclude Include="Gravity.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWindow.h" />

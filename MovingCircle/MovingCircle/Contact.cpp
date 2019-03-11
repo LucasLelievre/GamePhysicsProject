@@ -47,7 +47,7 @@ void Contact::resolveInterpenetration(float dt)
 
  void Contact::resolveVelocity(float dt)
  {
-	 float separatingVelocity = computeSeperationalVelocity();
+	 float separatingVelocity = computeSeperationalVelocity(); //velocity along normal
 	 if (separatingVelocity > 0) return;
 	 float newSepVel = -separatingVelocity * (1 + restitution) + resolveRestingContact(dt);
 	 if (newSepVel < 0) newSepVel = 0;

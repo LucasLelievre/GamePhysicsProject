@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "GameWindow.h"
+#include "Mouse.h"
 #include "ForceRegistery.h"
 #include "Solver.h"
 #include "ContactResolver.h"
@@ -13,12 +14,15 @@ class Game
 {
 private:
 	GameWindow* window;
+	Mouse* mouse;
 	ForceRegistery* forceRegistery = nullptr;
 	Solver* solver = nullptr;
 	vector<PhysEntity*> dynObjs;
 
 	vector<unique_ptr<CollisionData>> collisionData;
 	ContactResolver* resolver = nullptr;
+
+	//Gun* gun;
 public:
 	void Load();
 	//void GameLoop();
@@ -26,6 +30,8 @@ public:
 	void Inputs();
 	void Update(float dt);
 	void ReshapeWindow(int weigth, int height);
+	void clickMouse(int button, int state, int x, int y);
+	void motionMouse(int x, int y);
 
 	Game() {};
 	virtual ~Game() 

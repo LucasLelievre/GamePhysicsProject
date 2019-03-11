@@ -12,6 +12,7 @@ using namespace std;
 void Game::Load()
 {
 	window = new GameWindow("Physics motion test", 640, 480, 50, 50);
+	mouse = new Mouse();
 	solver = new VerletSolver;
 	forceRegistery = new ForceRegistery;
 
@@ -23,20 +24,24 @@ void Game::Load()
 	forceRegistery->add(ball, gravity);
 	dynObjs.push_back(ball);
 
-	params = new PhysParameters(10, vec2(200, 255), vec2(-200, 200), 0.0f);
+	params = new PhysParameters(10, vec2(500, 255), vec2(-200, 200), 0.0f);
 	ball = new Ball(10, params);
 	forceRegistery->add(ball, gravity);
 	dynObjs.push_back(ball);
+
+	params = new PhysParameters(10, vec2(300, 320), vec2(0, 0), 0.0f);
+	ball = new Ball(10, params);
+	dynObjs.push_back(ball);
+
+	//gun = new Gun(x, y);
 }
 
 
-void Game::Update(float dt)
-{
+void Game::Update(float dt) {
 	forceRegistery->updateForces(dt);
 	solver->integrate(dynObjs, dt);
 	forceRegistery->clear();
-	for (vector<PhysEntity*>::iterator it = dynObjs.begin(); it < dynObjs.end(); it++)
-	{
+	for (vector<PhysEntity*>::iterator it = dynObjs.begin(); it < dynObjs.end(); it++) {
 		(*it)->update(dt);
 	}
 	getCollisisonData();
@@ -53,6 +58,16 @@ void Game::Update(float dt)
 void Game::ReshapeWindow(int width, int height)
 {
 	window->Reshape(width, height);
+}
+
+void Game::clickMouse(int button, int state, int x, int y) {
+	/*for (vector<Entity*>::iterator it = dynObjs.begin(); it < dynObjs.end(); it++) {
+		(*it)->clickMouse(button, state, x, y);
+	}
+	mouse->button(button, state, x, y);*/
+}
+void Game::motionMouse(int x, int y) {
+	mouse->motion(x, y);
 }
 
 void Game::Render()

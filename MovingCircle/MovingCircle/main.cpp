@@ -6,6 +6,7 @@ int refreshMillis = 16;      // Refresh period in milliseconds
 Game* game;
 LowResTimer timer;
 double oldTime = 0;
+//vec2* winSize = new vec2(640.0f, 480.0f);
 
 /* Initialize OpenGL Graphics */
 void initGL() {
@@ -18,9 +19,16 @@ void display() {
 }
 
 /* Call back when the windows is re-sized */
-void reshape(GLsizei width, GLsizei height) 
-{
+void reshape(GLsizei width, GLsizei height)  {
 	game->ReshapeWindow(width, height);
+}
+/* Call back when a mouse button is pressed */
+void button(int button, int state, int x, int y) {
+	game->clickMouse(button, state, x, y);
+}
+/* Call back when mouse is moved */
+void motion(int x, int y) {
+	if (x >= 0 && x <= 640 && y >= 0 && y <= 480) game->motionMouse(x, y);
 }
 
 /* Fixed Time Update */
@@ -47,6 +55,11 @@ int main(int argc, char** argv) {
 	game = new Game();
 	game->Load();
 	timer.startTimer();
+
+	glutMouseFunc(button);
+	glutPassiveMotionFunc(motion);
+	glutMotionFunc(motion);
+
 	GLUTRenderer();
 
 	delete game;
