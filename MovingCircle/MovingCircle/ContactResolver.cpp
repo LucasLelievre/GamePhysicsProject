@@ -5,9 +5,10 @@
 
 void ContactResolver::resolverContacts(Contact* contactArray, int numContacts, float dt) {
 	iteration = 0;
+	int maxIndex = numContacts;
 	while (iteration < numIterations) {
 		float max = 0;
-		int maxIndex = numContacts;
+		maxIndex = numContacts;
 		for (int i = 0; i < numContacts; i++) {
 			float sepVel = contactArray[i].computeSeperationalVelocity();
 			if (sepVel < max) {

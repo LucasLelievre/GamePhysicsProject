@@ -13,5 +13,6 @@ private:
 public:
 	Gun(vec2 pos) : pos(pos) {};
 	~Gun();
+	void shoot(float x, float y);
 };
 

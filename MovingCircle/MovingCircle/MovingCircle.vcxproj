@@ -123,6 +123,7 @@
     <ClCompile Include="ForceRegistery.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Gravity.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Boundaries.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Force.h" />
     <ClInclude Include="ForceRegistery.h" />
     <ClInclude Include="Gravity.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Game.h" />

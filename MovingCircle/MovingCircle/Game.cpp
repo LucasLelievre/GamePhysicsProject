@@ -13,8 +13,8 @@ void Game::Load()
 {
 	window = new GameWindow("Physics motion test", 640, 480, 50, 50);
 	mouse = new Mouse();
-	solver = new VerletSolver;
-	forceRegistery = new ForceRegistery;
+	solver = new VerletSolver();
+	forceRegistery = new ForceRegistery();
 
 	resolver = new ContactResolver();
 
@@ -31,7 +31,7 @@ void Game::Load()
 
 	params = new PhysParameters(10, vec2(300, 320), vec2(0, 0), 0.0f);
 	ball = new Ball(10, params);
-	dynObjs.push_back(ball);
+	//dynObjs.push_back(ball);
 
 	//gun = new Gun(x, y);
 }
@@ -65,6 +65,9 @@ void Game::clickMouse(int button, int state, int x, int y) {
 		(*it)->clickMouse(button, state, x, y);
 	}
 	mouse->button(button, state, x, y);*/
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		//gun.shoot(x, y);
+	}
 }
 void Game::motionMouse(int x, int y) {
 	mouse->motion(x, y);
