@@ -30,6 +30,10 @@ void button(int button, int state, int x, int y) {
 void motion(int x, int y) {
 	if (x >= 0 && x <= 640 && y >= 0 && y <= 480) game->motionMouse(x, y);
 }
+/* Call back when mouse is moved */
+void keyboard(unsigned char key, int x, int y) {
+	game->keyboard(key/*, x, y*/);
+}
 
 /* Fixed Time Update */
 void update(int value) 
@@ -59,6 +63,7 @@ int main(int argc, char** argv) {
 	glutMouseFunc(button);
 	glutPassiveMotionFunc(motion);
 	glutMotionFunc(motion);
+	glutKeyboardFunc(keyboard);
 
 	GLUTRenderer();
 

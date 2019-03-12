@@ -72,6 +72,15 @@ void Game::clickMouse(int button, int state, int x, int y) {
 void Game::motionMouse(int x, int y) {
 	mouse->motion(x, y);
 }
+void Game::keyboard(unsigned char key/*, int x, int y*/) {
+	switch (key) {
+	case ' ':
+		cout << "pouet" << endl;
+		break;
+	default:
+		break;
+	}
+}
 
 void Game::Render()
 {

@@ -32,6 +32,7 @@ public:
 	void ReshapeWindow(int weigth, int height);
 	void clickMouse(int button, int state, int x, int y);
 	void motionMouse(int x, int y);
+	void keyboard(unsigned char key/*, int x, int y*/);
 
 	Game() {};
 	virtual ~Game() 
